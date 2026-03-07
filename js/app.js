@@ -148,27 +148,6 @@
     initSections();
     initMarquees();
     initCounters();
-    initNavLinks();
-  }
-
-  // === Nav Link Scroll ===
-  function initNavLinks() {
-    const sections = document.querySelectorAll(".scroll-section");
-    document.querySelectorAll(".nav-links a[data-nav-section]").forEach((link) => {
-      link.addEventListener("click", (e) => {
-        e.preventDefault();
-        const idx = parseInt(link.dataset.navSection) - 1;
-        const section = sections[idx];
-        if (!section) return;
-        const enter = parseFloat(section.dataset.enter) / 100;
-        const leave = parseFloat(section.dataset.leave) / 100;
-        const mid = (enter + leave) / 2;
-        const containerH = scrollContainer.offsetHeight;
-        const containerTop = scrollContainer.offsetTop;
-        const target = containerTop + mid * containerH - window.innerHeight / 2;
-        lenis.scrollTo(Math.max(0, target), { duration: 1.8 });
-      });
-    });
   }
 
   // === Circle-Wipe Hero Reveal ===
