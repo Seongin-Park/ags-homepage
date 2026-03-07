@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AGS America Inc — Automotive Manufacturing Excellence</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css?v=15">
+</head>
+<body>
+
+  <!-- 1. Loader -->
+  <div id="loader">
+    <div class="loader-brand">AGS AMERICA</div>
+    <div class="loader-bar-track">
+      <div id="loader-bar"></div>
+    </div>
+    <div id="loader-percent">0%</div>
+  </div>
+
+  <!-- 2. Fixed Header -->
+  <header class="site-header">
+    <nav>
+      <img src="ags-logo-white.png" alt="AGS America, Inc" class="nav-logo-img">
+      <div class="nav-links">
+        <a href="#" data-nav-section="1">About</a>
+        <a href="#" data-nav-section="2">Products</a>
+        <a href="#" data-nav-section="5">Facilities</a>
+        <a href="#" data-nav-section="6">Contact</a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- 3. Hero -->
+  <section class="hero-standalone" id="hero">
+    <span class="section-label">Opelika, Alabama</span>
+    <h1 class="hero-heading">
+      <span>Precision</span>
+      <span>Automotive</span>
+      <span>Manufacturing</span>
+    </h1>
+    <p class="hero-tagline">Tier 2 supplier powering Hyundai &amp; Kia assembly lines since 2020</p>
+    <div class="scroll-indicator">
+      <span>Scroll to explore</span>
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M12 5v14M5 12l7 7 7-7"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- 4. Canvas -->
+  <div class="canvas-wrap" id="canvas-wrap">
+    <canvas id="canvas"></canvas>
+  </div>
+
+  <!-- 5. Dark Overlay -->
+  <div id="dark-overlay"></div>
+
+  <!-- 6. Marquee -->
+  <div class="marquee-wrap" id="marquee1" data-scroll-speed="-20" data-enter="20" data-leave="42">
+    <div class="marquee-text">CONSOLE &bull; TRIM &bull; COCKPIT &bull; INJECTION &bull; ASSEMBLY &bull; CONSOLE &bull; TRIM &bull; COCKPIT &bull; INJECTION &bull; ASSEMBLY &bull;</div>
+  </div>
+
+  <!-- 7. Scroll Container -->
+  <div id="scroll-container">
+
+    <!-- Section 1: About -->
+    <section class="scroll-section section-content align-left"
+             data-enter="10" data-leave="26" data-animation="slide-left">
+      <div class="section-inner">
+        <span class="section-label">001 / About</span>
+        <h2 class="section-heading">Built for<br>the Road Ahead</h2>
+        <p class="section-body">AGS America entered the automotive manufacturing field in 2020 with a dedicated facility in Opelika, Alabama. We serve major OEMs including Hyundai Motor Manufacturing Alabama and Kia Georgia with precision-engineered interior components.</p>
+      </div>
+    </section>
+
+    <!-- Section 2: Products -->
+    <section class="scroll-section section-content align-right"
+             data-enter="22" data-leave="38" data-animation="fade-up">
+      <div class="section-inner">
+        <span class="section-label">002 / Products</span>
+        <h2 class="section-heading">Interior<br>Components</h2>
+        <p class="section-body">From center consoles to cockpit modules and interior trim, we manufacture critical components for Santa Fe, Telluride, Sorento, Santa Cruz, and Tucson platforms. Every part meets the highest OEM standards.</p>
+      </div>
+    </section>
+
+    <!-- Section 3: Capabilities -->
+    <section class="scroll-section section-content align-left"
+             data-enter="34" data-leave="50" data-animation="clip-reveal">
+      <div class="section-inner">
+        <span class="section-label">003 / Capabilities</span>
+        <h2 class="section-heading">Advanced<br>Manufacturing</h2>
+        <p class="section-body">Our facility features state-of-the-art injection molding machines — all new equipment invested since 2021 — alongside a full-service mold shop for rapid tooling modifications and maintenance.</p>
+      </div>
+    </section>
+
+    <!-- Section 4: Stats -->
+    <section class="scroll-section section-stats"
+             data-enter="46" data-leave="62" data-animation="stagger-up">
+      <div class="stats-grid">
+        <div class="stat">
+          <span class="stat-number" data-value="79" data-decimals="0">0</span>
+          <span class="stat-suffix">$M</span>
+          <span class="stat-label">Annual Revenue</span>
+        </div>
+        <div class="stat">
+          <span class="stat-number" data-value="246" data-decimals="0">0</span>
+          <span class="stat-suffix">K sq ft</span>
+          <span class="stat-label">Facility Size</span>
+        </div>
+        <div class="stat">
+          <span class="stat-number" data-value="1.96" data-decimals="2">0</span>
+          <span class="stat-suffix">PPM</span>
+          <span class="stat-label">2025 Defect Rate</span>
+        </div>
+        <div class="stat">
+          <span class="stat-number" data-value="72" data-decimals="0">0</span>
+          <span class="stat-suffix">mi</span>
+          <span class="stat-label">From HMMA Plant</span>
+        </div>
+        <div class="stat">
+          <span class="stat-number" data-value="26" data-decimals="0">0</span>
+          <span class="stat-suffix">mi</span>
+          <span class="stat-label">From KaGA Plant</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 5: Location -->
+    <section class="scroll-section section-content align-right"
+             data-enter="58" data-leave="74" data-animation="scale-up">
+      <div class="section-inner">
+        <span class="section-label">005 / Location</span>
+        <h2 class="section-heading">Strategic<br>Proximity</h2>
+        <p class="section-body">Located in Opelika, Alabama — just 72 miles from HMMA in Montgomery and 25 miles from KaGA in West Point, Georgia. Our strategic position enables just-in-time delivery to both assembly plants.</p>
+      </div>
+    </section>
+
+    <!-- Section 6: CTA -->
+    <section class="scroll-section section-content section-cta align-left"
+             data-enter="72" data-leave="92" data-animation="fade-up">
+      <div class="section-inner">
+        <span class="section-label">006 / Connect</span>
+        <h2 class="section-heading">Partner<br>With Us</h2>
+        <p class="section-body">Ready to discuss your next automotive component program? Our team is here to deliver precision, quality, and reliability.</p>
+        <a href="mailto:info@agsamerica.com" class="cta-button">Get in Touch</a>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <img src="ags-logo-white.png" alt="AGS America, Inc" class="footer-logo">
+      <div class="footer-info">Opelika, Alabama &bull; Automotive Manufacturing</div>
+      <div class="footer-copy">&copy; 2026 AGS America Inc. All rights reserved.</div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1/dist/lenis.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js"></script>
+  <script src="js/app.js?v=18"></script>
+</body>
+</html>
