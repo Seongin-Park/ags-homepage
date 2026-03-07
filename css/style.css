@@ -447,19 +447,24 @@ body {
 /* === Hamburger Toggle === */
 .nav-toggle {
   display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
   background: none;
   border: none;
   cursor: pointer;
   padding: 0.5rem;
+  width: 40px;
+  height: 40px;
   z-index: 201;
 }
 
 .nav-toggle span {
   display: block;
-  width: 24px;
+  width: 22px;
   height: 2px;
   background: #fff;
-  margin: 5px 0;
+  border-radius: 1px;
   transition: transform 0.3s, opacity 0.3s;
 }
 
@@ -477,7 +482,7 @@ body {
 
 @media (max-width: 768px) {
   .nav-toggle {
-    display: block;
+    display: flex;
   }
 
   .nav-links {
