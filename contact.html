@@ -21,6 +21,9 @@
         <a href="facilities.html">Facilities</a>
         <a href="contact.html" class="active">Contact</a>
       </div>
+      <button class="nav-toggle" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
     </nav>
   </header>
 
@@ -72,5 +75,11 @@
     </div>
   </footer>
 
+<script>
+    document.querySelector('.nav-toggle').addEventListener('click', function() {
+      this.classList.toggle('open');
+      document.querySelector('.nav-links').classList.toggle('open');
+    });
+  </script>
 </body>
 </html>
