@@ -22,7 +22,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;0,800;0,900;1,500;1,700;1,900&family=Archivo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
 <link rel="stylesheet" href="css/main.css?v=1">
-<link rel="stylesheet" href="css/index.css?v=1">
+<link rel="stylesheet" href="css/index.css?v=2">
 <link rel="stylesheet" href="css/sub.css?v=1">
 </head>
 <body>
@@ -80,9 +80,18 @@
 
     <div class="split">
       <div class="vehicle-stage reveal">
+        <div class="stage-tabs" role="group" aria-label="Vehicle view">
+          <button type="button" class="stage-tab" id="tabInterior" data-view="interior" aria-pressed="true">Interior</button>
+          <button type="button" class="stage-tab" id="tabExterior" data-view="exterior" aria-pressed="false">Exterior</button>
+        </div>
         <div class="stage-floor" aria-hidden="true"></div>
-        <div class="vehicle-photo" id="vehiclePhoto">
-          <img src="img/suv-side-studio.webp" alt="Generic SUV side profile" decoding="async"
+        <div class="vehicle-photo" id="vehiclePhoto" data-active-view="interior">
+          <img class="stage-img" data-view="interior" src="img/interior-cockpit-studio.webp"
+               alt="SUV cockpit interior view from rear seats" decoding="async"
+               width="1024" height="559"
+               onerror="this.closest('.vehicle-photo').classList.add('no-img')">
+          <img class="stage-img" data-view="exterior" src="img/suv-side-studio.webp"
+               alt="Generic SUV side profile" decoding="async"
                width="860" height="430"
                onerror="this.closest('.vehicle-photo').classList.add('no-img')">
           <div class="vehicle-fallback" aria-hidden="true">
@@ -110,23 +119,23 @@
             </svg>
           </div>
           <div class="hotspots">
-            <button class="hs" data-part="0" style="left:42.1%;top:57.2%" aria-label="Front Console — view details">
+            <button class="hs" data-part="0" data-view="interior" style="left:52%;top:74%" aria-label="Front Console — view details">
               <span class="hs-pulse"></span><span class="hs-ring"></span><span class="hs-core">1</span></button>
-            <button class="hs" data-part="1" style="left:32.9%;top:50.2%" aria-label="Glove Box — view details">
+            <button class="hs" data-part="1" data-view="interior" style="left:66%;top:56%" aria-label="Glove Box — view details">
               <span class="hs-pulse"></span><span class="hs-ring"></span><span class="hs-core">2</span></button>
-            <button class="hs" data-part="2" style="left:29.3%;top:41.9%" aria-label="Crash Pad — view details">
+            <button class="hs" data-part="2" data-view="interior" style="left:43%;top:46%" aria-label="Crash Pad — view details">
               <span class="hs-pulse"></span><span class="hs-ring"></span><span class="hs-core">3</span></button>
-            <button class="hs" data-part="3" style="left:59.3%;top:40.5%" aria-label="Pillar Trim — view details">
+            <button class="hs" data-part="3" data-view="interior" style="left:84%;top:28%" aria-label="Pillar Trim — view details">
               <span class="hs-pulse"></span><span class="hs-ring"></span><span class="hs-core">4</span></button>
-            <button class="hs" data-part="4" style="left:50.9%;top:58.6%" aria-label="D-Side Trim — view details">
+            <button class="hs" data-part="4" data-view="interior" style="left:12%;top:60%" aria-label="D-Side Trim — view details">
               <span class="hs-pulse"></span><span class="hs-ring"></span><span class="hs-core">5</span></button>
-            <button class="hs" data-part="5" style="left:68.4%;top:50.7%" aria-label="Transverse Trim — view details">
+            <button class="hs" data-part="5" data-view="exterior" style="left:86%;top:45%" aria-label="Transverse Trim — view details">
               <span class="hs-pulse"></span><span class="hs-ring"></span><span class="hs-core">6</span></button>
-            <button class="hs" data-part="6" style="left:84.0%;top:60.9%" aria-label="Fender and Quarter Garnish — view details">
+            <button class="hs" data-part="6" data-view="exterior" style="left:84.0%;top:60.9%" aria-label="Fender and Quarter Garnish — view details">
               <span class="hs-pulse"></span><span class="hs-ring"></span><span class="hs-core">7</span></button>
           </div>
         </div>
-        <p class="stage-caption">Fig. 01 · SUV reference profile — tap a numbered point</p>
+        <p class="stage-caption">Fig. 01 · SUV reference views — tap a numbered point</p>
       </div>
 
       <aside class="part-card reveal d2" id="partCard" aria-live="polite">
@@ -135,6 +144,9 @@
           <span class="part-tag swap" id="pcTag">Interior</span>
         </div>
         <h3 class="part-name swap" id="pcName">Front Console</h3>
+        <div class="part-photo swap" id="pcPhotoWrap" hidden>
+          <img id="pcPhoto" alt="" decoding="async">
+        </div>
         <p class="part-desc swap" id="pcDesc">Center console module…</p>
         <div class="part-specs swap" id="pcSpecs">
           <div>Process<b id="pcProc">Molding + Assembly</b></div>
@@ -308,6 +320,6 @@
 </footer>
 
 <script src="js/main.js?v=1" defer></script>
-<script src="js/hotspots.js?v=2" defer></script>
+<script src="js/hotspots.js?v=4" defer></script>
 </body>
 </html>
