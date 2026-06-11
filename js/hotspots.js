@@ -81,5 +81,30 @@
   if (prev) prev.addEventListener("click", function () { selectPart(current - 1); });
   if (next) next.addEventListener("click", function () { selectPart(current + 1); });
 
+  // Pre-measure the tallest part text and lock the card height so
+  // swapping parts never reflows the section (buttons stay put).
+  function lockCardHeight() {
+    var clone = card.cloneNode(true);
+    clone.style.cssText = "position:absolute;left:-9999px;top:0;visibility:hidden;pointer-events:none;min-height:0;height:auto;width:" + card.offsetWidth + "px";
+    card.parentNode.appendChild(clone);
+    var cZone = clone.querySelector("#pcZone"), cTag = clone.querySelector("#pcTag"),
+        cName = clone.querySelector("#pcName"), cDesc = clone.querySelector("#pcDesc"),
+        cProc = clone.querySelector("#pcProc"), cCars = clone.querySelector("#pcCars");
+    var max = 0;
+    PARTS.forEach(function (p) {
+      cZone.textContent = p.zone; cTag.textContent = p.tag; cName.textContent = p.name;
+      cDesc.textContent = p.desc; cProc.textContent = p.proc; cCars.textContent = p.cars;
+      max = Math.max(max, clone.offsetHeight);
+    });
+    card.parentNode.removeChild(clone);
+    if (max > 0) card.style.minHeight = max + "px";
+  }
+  var resizeTimer = null;
+  window.addEventListener("resize", function () {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(lockCardHeight, 200);
+  });
+
   applyPart(0);
+  lockCardHeight();
 })();
