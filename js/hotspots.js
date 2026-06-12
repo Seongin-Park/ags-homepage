@@ -28,27 +28,27 @@
     { name: "Front Console", zone: "Interior · Center", tag: "Interior",
       view: VIEW_FRONT, img: "img/parts/front-console.webp",
       desc: "Center console module housing the shifter surround, storage bin, and cupholder assembly — injection molded, grained, and fully assembled with sequenced delivery to the trim line.",
-      proc: "Molding + Assembly", cars: "Santa Fe · Tucson" },
+      proc: "Molding + Assembly", cars: "Santa Fe · Santa Cruz · Tucson · Sorento" },
     { name: "Glove Box", zone: "Interior · IP, passenger side", tag: "Interior",
       view: VIEW_FRONT, img: "img/parts/glove-box.webp",
       desc: "Passenger-side storage compartment with damped hinge kinematics, latch integration, and Class-A grained surfaces matched to the crash pad grain master.",
-      proc: "Molding + Assembly", cars: "Tucson · Santa Cruz" },
+      proc: "Molding + Assembly", cars: "Sorento · Telluride" },
     { name: "Crash Pad", zone: "Interior · Instrument panel", tag: "Interior",
       view: VIEW_FRONT, img: "img/parts/crash-pad.webp",
       desc: "Full instrument-panel structure — the largest interior molding in the vehicle. Carrier, ducting, and topper integration with dimensional control across a meter-wide span.",
-      proc: "Large-tonnage Molding", cars: "Santa Fe · Telluride" },
+      proc: "Large-tonnage Molding", cars: "Sorento · Telluride" },
     { name: "Pillar Trim — FRT · CTR · RR", zone: "Interior · A / B / C pillars", tag: "Interior",
       view: VIEW_FRONT, img: "img/parts/pillar-trim.webp",
       desc: "Front, center, and rear pillar garnish set — curtain-airbag deployment compliant, with clip retention validated for repeated service removal and zero-rattle fit.",
-      proc: "Molding + Clip Assembly", cars: "Sorento · Telluride" },
+      proc: "Molding + Clip Assembly", cars: "Tucson · Santa Cruz" },
     { name: "Transverse Trim", zone: "Interior · Cargo opening sill", tag: "Interior",
       view: VIEW_REAR, img: "img/parts/transverse-trim.webp",
       desc: "Cargo-opening transverse trim member at the tailgate sill — a long, thin-wall molding where warpage control and gap consistency define the perceived quality of the rear cabin.",
-      proc: "Thin-wall Molding", cars: "Santa Cruz · Tucson" },
+      proc: "Thin-wall Molding", cars: "Tucson" },
     { name: "Fender & Quarter Garnish", zone: "Exterior · Body side", tag: "Exterior",
       view: VIEW_EXT, img: "img/parts/garnish.webp",
       desc: "Exterior fender and quarter garnish panels — UV-stable, weather-sealed body-side moldings engineered for gap-and-flush alignment against painted sheet metal.",
-      proc: "Molding + Exterior Finish", cars: "Santa Cruz · Telluride" }
+      proc: "Molding + Exterior Finish", cars: "Santa Cruz" }
   ];
 
   var card = document.getElementById("partCard");
