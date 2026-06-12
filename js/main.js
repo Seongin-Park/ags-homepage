@@ -78,6 +78,65 @@
     }
   }
 
+  /* ---------------- capability cards: accordion (capabilities.html) ----------------
+     Each .cap[data-cap] has a .cap-toggle button controlling a .cap-detail panel.
+     Smooth expand via CSS grid-template-rows (0fr→1fr); instant when reduced motion.
+     Hash entry (capabilities.html#assembly) auto-expands + scrolls. */
+  var capCards = Array.prototype.slice.call(document.querySelectorAll(".cap[data-cap]"));
+  if (capCards.length) {
+    var setCap = function (card, open) {
+      var toggle = card.querySelector(".cap-toggle");
+      var detail = card.querySelector(".cap-detail");
+      var label = card.querySelector(".cap-toggle-label");
+      if (!toggle || !detail) return;
+      if (open) {
+        detail.hidden = false;
+        toggle.setAttribute("aria-expanded", "true");
+        if (label) label.textContent = "Close";
+        // next frame so the grid-rows transition runs after `hidden` is cleared
+        if (reduceMotion) { detail.classList.add("open"); }
+        else { requestAnimationFrame(function () { requestAnimationFrame(function () { detail.classList.add("open"); }); }); }
+      } else {
+        toggle.setAttribute("aria-expanded", "false");
+        if (label) label.textContent = "Details";
+        detail.classList.remove("open");
+        if (reduceMotion) {
+          detail.hidden = true;
+        } else {
+          var onEnd = function (e) {
+            if (e.propertyName !== "grid-template-rows") return;
+            if (!detail.classList.contains("open")) detail.hidden = true;
+            detail.removeEventListener("transitionend", onEnd);
+          };
+          detail.addEventListener("transitionend", onEnd);
+        }
+      }
+    };
+
+    capCards.forEach(function (card) {
+      var toggle = card.querySelector(".cap-toggle");
+      if (!toggle) return;
+      toggle.addEventListener("click", function () {
+        var open = toggle.getAttribute("aria-expanded") === "true";
+        setCap(card, !open);
+      });
+    });
+
+    var openFromHash = function () {
+      var id = (window.location.hash || "").replace(/^#/, "");
+      if (!id) return;
+      var card = document.getElementById(id);
+      if (!card || !card.hasAttribute("data-cap")) return;
+      setCap(card, true);
+      // ensure scroll lands correctly even if the browser scrolled before expand
+      requestAnimationFrame(function () {
+        card.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" });
+      });
+    };
+    openFromHash();
+    window.addEventListener("hashchange", openFromHash);
+  }
+
   /* ---------------- hero parallax (GSAP, progressive) ---------------- */
   if (hasGSAP && !reduceMotion) {
     var heroPhoto = document.querySelector(".hero-photo img");

@@ -227,6 +227,16 @@
 .cap h3{font:800 clamp(22px,2vw,30px)/1.15 var(--serif);letter-spacing:-.01em;margin-top:14px}
 .cap p{margin-top:14px;font:500 13.5px/1.8 var(--sans);color:#55555a}
 .cap-note{margin-top:22px;padding-top:16px;border-top:1px solid var(--line);font:700 10px/1.7 var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--red)}
+
+/* whole-card link (home → capabilities anchor) */
+.cap--link{cursor:pointer}
+.cap-explore{margin-top:18px;display:inline-flex;align-items:center;gap:8px;font:800 11px/1 var(--sans);letter-spacing:.22em;text-transform:uppercase;color:var(--red);align-self:flex-start;transition:gap .25s ease}
+.cap-explore span{transition:transform .25s ease}
+.cap-explore::before{content:"";position:absolute;inset:0;z-index:1}
+.cap--link:hover .cap-explore{gap:14px}
+.cap--link:hover .cap-explore span{transform:translateX(4px)}
+.cap-explore:focus-visible{outline:2px solid var(--red);outline-offset:4px}
+
 @media (max-width:980px){ .caps-grid{grid-template-columns:1fr} }
 
 /* ---------- QUALITY BAND ---------- */
