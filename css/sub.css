@@ -107,7 +107,7 @@ a.cert-mini-item:hover{background:var(--paper)}
 .cap-figure{aspect-ratio:4/3;display:flex;align-items:center;justify-content:center;background:linear-gradient(180deg,#15151a,#0d0d10)}
 .cap-figure svg{width:46%;height:auto}
 .cap-body{padding:clamp(26px,3vw,40px);display:flex;flex-direction:column;flex:1}
-.cap-body .index-no{margin-bottom:auto}
+.cap-body .index-no{margin-bottom:18px}
 .cap h3{font:800 clamp(22px,2vw,30px)/1.15 var(--serif);letter-spacing:-.01em;margin-top:14px}
 .cap p{margin-top:14px;font:500 13.5px/1.8 var(--sans);color:#55555a}
 .cap-note{margin-top:22px;padding-top:16px;border-top:1px solid var(--line);font:700 10px/1.7 var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--red)}
@@ -131,8 +131,7 @@ a.cert-mini-item:hover{background:var(--paper)}
 .cap-detail[hidden]{display:none}
 .cap-detail.open{grid-template-rows:1fr}
 .cap-detail-inner{overflow:hidden;min-height:0}
-.cap-detail .cap-detail-photo,.cap-detail .cap-detail-list{margin:0}
-.cap-detail-photo{width:100%;aspect-ratio:16/9;object-fit:cover;display:block}
+.cap-detail .cap-detail-list{margin:0}
 .cap-detail-list{list-style:none;padding:clamp(22px,2.6vw,32px);display:flex;flex-direction:column;gap:12px}
 .cap-detail-list li{position:relative;padding-left:22px;font:500 13.5px/1.6 var(--sans);color:#3a3a3f}
 .cap-detail-list li::before{content:"";position:absolute;left:0;top:8px;width:8px;height:8px;background:var(--red);border-radius:50%}
