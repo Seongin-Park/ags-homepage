@@ -22,7 +22,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;0,800;0,900;1,500;1,700;1,900&family=Archivo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
 <link rel="stylesheet" href="css/main.css?v=1">
-<link rel="stylesheet" href="css/sub.css?v=2">
+<link rel="stylesheet" href="css/sub.css?v=3">
 </head>
 <body>
 
@@ -108,33 +108,76 @@
     </div>
 
     <div class="caps-grid">
-      <article class="cap reveal">
+      <article class="cap reveal" id="injection-molding" data-cap>
         <div class="cap-photo"><img src="img/molding-machine-1.webp" alt="High-tonnage injection molding line" loading="lazy" decoding="async" width="1920" height="897"></div>
         <div class="cap-body">
           <span class="index-no">01</span>
           <h3>Injection Molding</h3>
           <p>Every molding machine purchased new — no legacy equipment — starting in 2021. In April 2025, three machines were upgraded to next-generation LS injection systems, enhancing precision and cycle efficiency. We mold the full range of interior sizes, from small trim to meter-wide console housings.</p>
           <div class="cap-note">Next-gen LS presses · 2025</div>
+          <button class="cap-toggle" type="button" aria-expanded="false" aria-controls="injection-molding-detail">
+            <span class="cap-toggle-icon" aria-hidden="true"></span>
+            <span class="cap-toggle-label">Details</span>
+          </button>
+        </div>
+        <div class="cap-detail" id="injection-molding-detail" role="region" aria-label="Injection Molding details" hidden>
+          <div class="cap-detail-inner">
+            <img class="cap-detail-photo" src="img/molding-machine-3.webp" alt="Next-generation LS injection molding system" loading="lazy" decoding="async">
+            <ul class="cap-detail-list">
+              <li>Every machine purchased new since 2021 — no legacy equipment.</li>
+              <li>Three next-generation LS systems added in April 2025.</li>
+              <li>Full range: small trim pieces to meter-wide console housings.</li>
+            </ul>
+          </div>
         </div>
       </article>
 
-      <article class="cap reveal d1">
+      <article class="cap reveal d1" id="assembly" data-cap>
         <div class="cap-photo"><img src="img/assembly-line.webp" alt="Assembly line on the AGS production floor" loading="lazy" decoding="async" width="1920" height="951"></div>
         <div class="cap-body">
           <span class="index-no">02</span>
           <h3>Assembly</h3>
           <p>Sub-assembly through finished module — clip, weld, and fastener integration with in-line poka-yoke verification and just-in-time shipment to OEM schedules. Tight tolerances hold across every interface for first-time assembly fit.</p>
           <div class="cap-note">Just-in-time to OEM schedules</div>
+          <button class="cap-toggle" type="button" aria-expanded="false" aria-controls="assembly-detail">
+            <span class="cap-toggle-icon" aria-hidden="true"></span>
+            <span class="cap-toggle-label">Details</span>
+          </button>
+        </div>
+        <div class="cap-detail" id="assembly-detail" role="region" aria-label="Assembly details" hidden>
+          <div class="cap-detail-inner">
+            <img class="cap-detail-photo" src="img/warehouse.webp" alt="Raw and sub-material warehouse feeding the assembly lines" loading="lazy" decoding="async">
+            <ul class="cap-detail-list">
+              <li>Clip, weld, and fastener integration.</li>
+              <li>In-line poka-yoke verification.</li>
+              <li>Just-in-time shipment to OEM schedules.</li>
+              <li>Raw &amp; sub-material warehouse feeding the lines.</li>
+            </ul>
+          </div>
         </div>
       </article>
 
-      <article class="cap reveal d2">
+      <article class="cap reveal d2" id="mold-shop" data-cap>
         <div class="cap-photo"><img src="img/mold-shop.webp" alt="GMS on-site mold shop inside the AGS facility" loading="lazy" decoding="async" width="1280" height="605"></div>
         <div class="cap-body">
           <span class="index-no">03</span>
           <h3>On-site Mold Shop <span style="font-size:.6em;letter-spacing:.1em">(GMS)</span></h3>
           <p>Global Mold Systems (GMS), a specialized mold maintenance company, operates on-site within our facility. This embedded partnership enables rapid tooling maintenance, modifications, and repairs — cutting downtime from weeks to hours and protecting program launch timing.</p>
           <div class="cap-note">Tooling uptime, in-house</div>
+          <button class="cap-toggle" type="button" aria-expanded="false" aria-controls="mold-shop-detail">
+            <span class="cap-toggle-icon" aria-hidden="true"></span>
+            <span class="cap-toggle-label">Details</span>
+          </button>
+        </div>
+        <div class="cap-detail" id="mold-shop-detail" role="region" aria-label="On-site Mold Shop details" hidden>
+          <div class="cap-detail-inner">
+            <ul class="cap-detail-list">
+              <li>Global Mold Systems operates inside the AGS facility.</li>
+              <li>Tooling maintenance, modifications, and repairs without leaving the building.</li>
+              <li>Downtime cut from weeks to hours.</li>
+              <li>Immediate response to engineering changes.</li>
+            </ul>
+          </div>
         </div>
       </article>
     </div>
@@ -272,6 +315,6 @@
   </div>
 </footer>
 
-<script src="js/main.js?v=1" defer></script>
+<script src="js/main.js?v=2" defer></script>
 </body>
 </html>
