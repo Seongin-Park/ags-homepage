@@ -1,43 +1,52 @@
 /* ============================================================
    AGS AMERICA — hotspots.js  (home + products pages)
-   Vehicle part hotspots over two studio views (Interior /
-   Exterior) -> swapping info card with a part photo slot.
-   Each base photo degrades to an inline SVG silhouette if the
+   Vehicle part hotspots over three studio sub-views:
+     interior-front (cockpit) · interior-rear (cargo) · exterior.
+   Two tabs (Interior / Exterior). The Interior tab holds two
+   sub-views swapped by left/right stage arrows. Selecting a
+   part (click or prev/next) auto-switches to its sub-view.
+   Each base photo degrades to an inline SVG silhouette if its
    studio image is unavailable (onerror sets .no-img).
    ============================================================ */
 (function () {
   "use strict";
   var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  // data-part index == array index. view gates which stage shows the hotspot;
-  // img is the white-background product shot (graceful onerror hide if missing).
+  // The three stage sub-views. The two tabs map onto these:
+  //   Interior tab -> interior-front (default) <-> interior-rear (arrows)
+  //   Exterior tab -> exterior
+  var VIEW_FRONT = "interior-front";
+  var VIEW_REAR  = "interior-rear";
+  var VIEW_EXT   = "exterior";
+
+  // Which tab a sub-view belongs to (drives tab aria-pressed state).
+  function tabOfView(view) { return view === VIEW_EXT ? "exterior" : "interior"; }
+
+  // data-part index == array index. view gates which stage sub-view shows the
+  // hotspot; img is the white-background product shot (graceful onerror hide).
   var PARTS = [
     { name: "Front Console", zone: "Interior · Center", tag: "Interior",
-      view: "interior", img: "img/parts/front-console.webp",
+      view: VIEW_FRONT, img: "img/parts/front-console.webp",
       desc: "Center console module housing the shifter surround, storage bin, and cupholder assembly — injection molded, grained, and fully assembled with sequenced delivery to the trim line.",
       proc: "Molding + Assembly", cars: "Santa Fe · Tucson" },
     { name: "Glove Box", zone: "Interior · IP, passenger side", tag: "Interior",
-      view: "interior", img: "img/parts/glove-box.webp",
+      view: VIEW_FRONT, img: "img/parts/glove-box.webp",
       desc: "Passenger-side storage compartment with damped hinge kinematics, latch integration, and Class-A grained surfaces matched to the crash pad grain master.",
       proc: "Molding + Assembly", cars: "Tucson · Santa Cruz" },
     { name: "Crash Pad", zone: "Interior · Instrument panel", tag: "Interior",
-      view: "interior", img: "img/parts/crash-pad.webp",
+      view: VIEW_FRONT, img: "img/parts/crash-pad.webp",
       desc: "Full instrument-panel structure — the largest interior molding in the vehicle. Carrier, ducting, and topper integration with dimensional control across a meter-wide span.",
       proc: "Large-tonnage Molding", cars: "Santa Fe · Telluride" },
     { name: "Pillar Trim — FRT · CTR · RR", zone: "Interior · A / B / C pillars", tag: "Interior",
-      view: "interior", img: "img/parts/pillar-trim.webp",
+      view: VIEW_FRONT, img: "img/parts/pillar-trim.webp",
       desc: "Front, center, and rear pillar garnish set — curtain-airbag deployment compliant, with clip retention validated for repeated service removal and zero-rattle fit.",
       proc: "Molding + Clip Assembly", cars: "Sorento · Telluride" },
-    { name: "D/Side Trim", zone: "Interior · Door & side panels", tag: "Interior",
-      view: "interior", img: "img/parts/dside-trim.webp",
-      desc: "Door and side trim panels with integrated armrest, switch bezel, and speaker grille zones — multi-material molding with grain-matched visible surfaces.",
-      proc: "Molding + Assembly", cars: "Santa Fe · Sorento" },
-    { name: "Transverse Trim", zone: "Interior · Cross-car & cargo", tag: "Interior",
-      view: "exterior", img: "img/parts/transverse-trim.webp",
-      desc: "Cross-car and cargo-area transverse trim members — long, thin-wall moldings where warpage control and gap consistency define the perceived quality of the rear cabin.",
+    { name: "Transverse Trim", zone: "Interior · Cargo opening sill", tag: "Interior",
+      view: VIEW_REAR, img: "img/parts/transverse-trim.webp",
+      desc: "Cargo-opening transverse trim member at the tailgate sill — a long, thin-wall molding where warpage control and gap consistency define the perceived quality of the rear cabin.",
       proc: "Thin-wall Molding", cars: "Santa Cruz · Tucson" },
     { name: "Fender & Quarter Garnish", zone: "Exterior · Body side", tag: "Exterior",
-      view: "exterior", img: "img/parts/garnish.webp",
+      view: VIEW_EXT, img: "img/parts/garnish.webp",
       desc: "Exterior fender and quarter garnish panels — UV-stable, weather-sealed body-side moldings engineered for gap-and-flush alignment against painted sheet metal.",
       proc: "Molding + Exterior Finish", cars: "Santa Cruz · Telluride" }
   ];
@@ -57,16 +66,28 @@
   var stage = document.getElementById("vehiclePhoto");
   var tabs  = Array.prototype.slice.call(document.querySelectorAll(".stage-tab"));
   var spots = Array.prototype.slice.call(document.querySelectorAll(".hs"));
-  var current = 0, activeView = "interior", swapTimer = null;
+  var arrowPrev = document.getElementById("stagePrev"); // -> cockpit (front)
+  var arrowNext = document.getElementById("stageNext"); // -> cargo (rear)
+  var current = 0, activeView = VIEW_FRONT, swapTimer = null;
 
   function pad(n) { return (n < 10 ? "0" : "") + n; }
+
+  // The Interior tab exposes two sub-views via stage arrows. Show only the arrow
+  // that leads somewhere: front -> next(cargo), rear -> prev(cockpit). Exterior
+  // has no sub-views, so both arrows hide.
+  function syncArrows() {
+    if (arrowPrev) arrowPrev.hidden = (activeView !== VIEW_REAR);
+    if (arrowNext) arrowNext.hidden = (activeView !== VIEW_FRONT);
+  }
 
   function setView(view) {
     activeView = view;
     if (stage) stage.setAttribute("data-active-view", view);
+    var tab = tabOfView(view);
     tabs.forEach(function (t) {
-      t.setAttribute("aria-pressed", t.dataset.view === view ? "true" : "false");
+      t.setAttribute("aria-pressed", t.dataset.view === tab ? "true" : "false");
     });
+    syncArrows();
   }
 
   function applyPart(i) {
@@ -108,8 +129,10 @@
     }, 280);
   }
 
-  function firstPartOfView(view) {
-    for (var k = 0; k < PARTS.length; k++) { if (PARTS[k].view === view) return k; }
+  function firstPartOfTab(tab) {
+    for (var k = 0; k < PARTS.length; k++) {
+      if (tabOfView(PARTS[k].view) === tab) return k;
+    }
     return 0;
   }
 
@@ -119,12 +142,27 @@
   });
   tabs.forEach(function (t) {
     t.addEventListener("click", function () {
-      var view = t.dataset.view;
-      if (view === activeView) return;
-      setView(view);
-      selectPart(firstPartOfView(view));   // auto-select that view's first part
+      var tab = t.dataset.view;                 // "interior" | "exterior"
+      if (tabOfView(activeView) === tab) return;
+      selectPart(firstPartOfTab(tab));          // Interior -> front first part
     });
   });
+
+  // Stage arrows swap interior sub-views without changing the selected part's tab.
+  // The arrow only changes which sub-view is shown; if the current part lives in
+  // the other sub-view, selecting that sub-view's first part keeps card + stage in sync.
+  function gotoView(view) {
+    if (view === activeView) return;
+    // pick the part to surface: keep current if it belongs to the target view,
+    // otherwise the target sub-view's first part.
+    if (PARTS[current].view === view) { setView(view); return; }
+    var idx = current;
+    for (var k = 0; k < PARTS.length; k++) { if (PARTS[k].view === view) { idx = k; break; } }
+    selectPart(idx);
+  }
+  if (arrowPrev) arrowPrev.addEventListener("click", function () { gotoView(VIEW_FRONT); });
+  if (arrowNext) arrowNext.addEventListener("click", function () { gotoView(VIEW_REAR); });
+
   var prev = document.getElementById("pcPrev");
   var next = document.getElementById("pcNext");
   if (prev) prev.addEventListener("click", function () { selectPart(current - 1); });
@@ -159,7 +197,7 @@
     resizeTimer = setTimeout(lockCardHeight, 200);
   });
 
-  setView("interior");
+  setView(VIEW_FRONT);
   applyPart(0);
   lockCardHeight();
 })();

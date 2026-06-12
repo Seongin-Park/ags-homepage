@@ -98,14 +98,16 @@
   background:radial-gradient(closest-side, rgba(225,6,0,.18), transparent 72%);filter:blur(2px);pointer-events:none;
 }
 /* studio photo base with graceful CSS fallback. Fixed ratio (interior 1024/559)
-   keeps stage height stable across view swaps; exterior contain-fits inside. */
+   keeps stage height stable across all sub-view swaps; exterior contain-fits inside.
+   Three sub-views: interior-front (cockpit) / interior-rear (cargo) / exterior. */
 .vehicle-photo{position:relative;width:100%;aspect-ratio:1024/559}
 .vehicle-photo .stage-img{
   position:absolute;inset:0;width:100%;height:100%;object-fit:contain;
   opacity:0;transition:opacity .3s ease;
 }
-#vehiclePhoto[data-active-view="interior"] .stage-img[data-view="interior"],
-#vehiclePhoto[data-active-view="exterior"] .stage-img[data-view="exterior"]{opacity:1}
+#vehiclePhoto[data-active-view="interior-front"] .stage-img[data-view="interior-front"],
+#vehiclePhoto[data-active-view="interior-rear"]  .stage-img[data-view="interior-rear"],
+#vehiclePhoto[data-active-view="exterior"]       .stage-img[data-view="exterior"]{opacity:1}
 @media (prefers-reduced-motion: reduce){.vehicle-photo .stage-img{transition:none}}
 .vehicle-fallback{
   position:absolute;inset:0;display:none;align-items:center;justify-content:center;
@@ -125,11 +127,12 @@
   position:absolute;width:40px;height:40px;transform:translate(-50%,-50%);
   background:none;border:0;padding:0;border-radius:50%;
 }
-/* only the active view's hotspots are visible / interactive */
-#vehiclePhoto[data-active-view="interior"] .hs[data-view="exterior"],
-#vehiclePhoto[data-active-view="exterior"] .hs[data-view="interior"]{
-  display:none;
-}
+/* only the active sub-view's hotspots are visible / interactive.
+   Hide all, then re-show the matching sub-view (three-state). */
+.hotspots .hs{display:none}
+#vehiclePhoto[data-active-view="interior-front"] .hs[data-view="interior-front"],
+#vehiclePhoto[data-active-view="interior-rear"]  .hs[data-view="interior-rear"],
+#vehiclePhoto[data-active-view="exterior"]       .hs[data-view="exterior"]{display:block}
 .hs-core{
   position:absolute;inset:9px;border-radius:50%;background:#fff;
   display:flex;align-items:center;justify-content:center;
@@ -142,6 +145,23 @@
 .hs:hover .hs-ring,.hs:focus-visible .hs-ring{border-color:var(--red)}
 .hs.active .hs-core{background:var(--red);color:#fff}
 .hs:focus-visible{outline:2px solid var(--red);outline-offset:3px}
+/* interior sub-view arrows (cockpit <-> cargo). Style C: white circular overlay
+   centered on the stage's left/right edge. JS sets [hidden] on the dead-end side. */
+.stage-arrow{
+  position:absolute;top:50%;transform:translateY(-50%);z-index:4;
+  width:44px;height:44px;border-radius:50%;border:0;cursor:pointer;padding:0;
+  display:flex;align-items:center;justify-content:center;
+  background:rgba(255,255,255,.92);color:var(--black);
+  box-shadow:0 6px 18px rgba(0,0,0,.35);
+  transition:background .25s ease,transform .25s ease;
+}
+.stage-arrow--prev{left:12px}
+.stage-arrow--next{right:12px}
+.stage-arrow svg{width:22px;height:22px;display:block}
+.stage-arrow[hidden]{display:none}
+.stage-arrow:hover{background:#fff;transform:translateY(-50%) scale(1.06)}
+.stage-arrow:focus-visible{outline:2px solid var(--red);outline-offset:3px}
+@media (prefers-reduced-motion: reduce){.stage-arrow{transition:none}.stage-arrow:hover{transform:translateY(-50%)}}
 .stage-caption{margin-top:6px;font:600 9px/1.6 var(--sans);letter-spacing:.3em;text-transform:uppercase;color:rgba(255,255,255,.35)}
 
 /* part info card */
